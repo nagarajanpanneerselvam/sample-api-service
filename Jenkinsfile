@@ -22,8 +22,8 @@ pipeline {
         }
         stage('Secrets Scanner') {
           steps {
-            container('truffleHog') {
-              sh "truffleHog ${GIT_URL}"
+            container('trufflehog') {
+              sh "trufflehog ${GIT_URL}"
             }
           }
         }
