@@ -69,6 +69,24 @@ pipeline {
         }
       }
     }
+    stage('Artefact Analysis') {
+      parallel {
+        stage('Grype Scan') {
+          steps{
+            container('docker-tools') {
+              sh "grype ${APP_NAME}"
+            }
+          }
+        }
+        stage('Dockle Scan') {
+          steps{
+            container('docker-tools') {
+              sh "dockle ${APP_NAME}"
+            }
+          }
+        }
+      }
+    }
     stage('Publish') {
       steps {
         container('docker-tools') {
