@@ -20,6 +20,11 @@ pipeline {
             }
           }
         }
+        stage('Secrets Scanner') {
+          container('truffleHog') {
+            sh "truffleHog ${GIT_URL}"
+          }
+        }
       }
     }
     stage('Build') {
